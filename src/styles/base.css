@@ -1,0 +1,189 @@
+/* Colores compartidos: cambiar uno aquí actualiza toda la página. */
+:root {
+  --fresa: #ffe9ef;
+  --algodon: #ffb8cf;
+  --rosa: #ff6f9c;
+  --durazno: #ffd2ad;
+  --menta: #b9ebd0;
+  --cielo: #bfdfff;
+  --lavanda: #d9ccff;
+  --mantequilla: #fff1b8;
+  --ciruela: #4a2b4f;
+  --ciruela-suave: #7a5c7e;
+  --borde: #f3d3de;
+  --blanco: #fff9fb;
+  --chocolate: #3b1f22;
+  --titulos: 'Epilogue', system-ui, sans-serif;
+  --texto: 'Nunito Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100svh;
+  background:
+    radial-gradient(ellipse at 8% 5%, #fff0f5 0, transparent 34%),
+    radial-gradient(ellipse at 92% 86%, #f1edff 0, transparent 30%),
+    #fff8fb;
+  color: var(--ciruela);
+  font: 400 17px/1.55 var(--texto);
+  overscroll-behavior-y: none;
+}
+
+#root {
+  position: relative;
+  width: min(100%, 920px);
+  min-height: 100svh;
+  margin: 0 auto;
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ciruela);
+  font-family: var(--titulos);
+  line-height: 1.15;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #7c5cff;
+  outline-offset: 3px;
+}
+
+.personaje {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.animado {
+  animation: vaiven 3.2s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.retraso {
+  animation-delay: -1.4s;
+}
+
+@keyframes vaiven {
+  50% {
+    transform: translateY(-7px) rotate(-1.5deg);
+  }
+}
+
+.boton {
+  display: inline-flex;
+  min-width: 220px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  border: 2px solid var(--chocolate);
+  border-radius: 999px;
+  background: var(--algodon);
+  box-shadow: 0 4px 0 #e293ac;
+  color: var(--ciruela);
+  cursor: pointer;
+  font: 700 18px var(--titulos);
+  text-decoration: none;
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.boton:hover {
+  background: #ffc9da;
+  transform: translateY(-2px);
+}
+
+.boton:active {
+  box-shadow: 0 0 0 #e293ac;
+  transform: translateY(4px);
+}
+
+.boton:focus-visible {
+  outline: 3px solid #7c5cff;
+  outline-offset: 4px;
+}
+
+.corazones {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.corazones span {
+  position: absolute;
+  bottom: -24px;
+  z-index: 0;
+  color: var(--rosa);
+  font-size: 22px;
+  opacity: 0;
+  text-shadow: 0 2px 8px rgba(255, 111, 156, 0.28);
+  animation: subir 8s linear infinite;
+}
+
+.corazones span:nth-child(2n) {
+  color: #fff;
+  font-size: 17px;
+}
+
+.corazones span:nth-child(3n) {
+  color: #f4b5cb;
+  font-size: 25px;
+}
+
+@keyframes subir {
+  10% { opacity: 0.85; }
+  100% { transform: translateY(-80vh); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 16px;
+  }
+
+  .boton {
+    min-width: 190px;
+  }
+}
