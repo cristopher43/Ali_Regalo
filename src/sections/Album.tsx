@@ -294,7 +294,12 @@ export default function Album() {
             <h2>Un álbum para nosotros</h2>
             <p>Aquí guardaremos nuestras fotos y recuerdos favoritos.</p>
           </div>
-          <Personaje quien="ranita" pose="reposo" ancho={82} decorativo />
+          <img
+            src="/lya-recuerdos/lya-camara.png"
+            alt="Lya con su cámara de fotos"
+            width="86"
+            className="album__vacio-lya"
+          />
         </div>
       )}
       {vista === 'paginas' ? (

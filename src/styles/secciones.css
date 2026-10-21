@@ -803,6 +803,14 @@
   flex: 0 0 auto;
 }
 
+.album__vacio .album__vacio-lya {
+  width: clamp(65px, 18vw, 92px);
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 8px rgba(74, 43, 79, 0.15));
+}
+
 @media (min-width: 460px) {
   .polaroids {
     grid-template-columns: repeat(2, minmax(0, 1fr));
