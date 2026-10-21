@@ -5,6 +5,7 @@ import Personaje from '../components/Personaje'
 import IconoSeccion from '../components/IconoSeccion'
 import MapaRecuerdos from '../components/MapaRecuerdos'
 import SelectorMapa from '../components/SelectorMapa'
+import LibroAlbum from '../components/LibroAlbum'
 import type { Coordenadas, Identificador, Recuerdo } from '../data/recuerdo'
 import { buscarLugarEnChile } from '../data/buscarLugar'
 import { formatoFecha } from '../data/formatoFecha'
@@ -65,6 +66,7 @@ export default function Album() {
   const [errorGuardado, setErrorGuardado] = useState('')
   const [coordenadas, setCoordenadas] = useState<Coordenadas | null>(null)
   const [vista, setVista] = useState<'paginas' | 'mapa'>('paginas')
+  const [mostrarLibro, setMostrarLibro] = useState(false)
   const [recuerdoElegido, setRecuerdoElegido] = useState<Identificador | null>(null)
   const [recuerdoPorUbicar, setRecuerdoPorUbicar] = useState<Identificador | null>(null)
   const [opcionesAbiertasId, setOpcionesAbiertasId] = useState<Identificador | null>(null)
@@ -281,10 +283,13 @@ export default function Album() {
       {cargandoNube && <p role="status">Cargando nuestros recuerdos…</p>}
       <div className="album__pestanas" aria-label="Forma de ver los recuerdos">
         <button className={vista === 'paginas' ? 'activa' : ''} onClick={() => setVista('paginas')} type="button">
-          📖 Páginas
+          📋 Polaroids
         </button>
         <button className={vista === 'mapa' ? 'activa' : ''} onClick={() => setVista('mapa')} type="button">
           📍 Mapa
+        </button>
+        <button className="album__btn-libro" onClick={() => setMostrarLibro(true)} type="button">
+          📖 Ver como álbum
         </button>
       </div>
       {lista.length === 0 && !cargandoNube && vista === 'paginas' && (
@@ -412,6 +417,10 @@ export default function Album() {
           {abierto ? '↓ Ir al formulario' : '+ Agregar recuerdo'}
         </button>
       </div>
+
+      {mostrarLibro && (
+        <LibroAlbum recuerdos={lista} alCerrar={() => setMostrarLibro(false)} />
+      )}
     </Pantalla>
   )
 }
