@@ -68,14 +68,52 @@
   border-radius: 24px;
   background: var(--blanco);
   box-shadow: 0 8px 20px rgba(255, 184, 207, 0.25);
-  font: 700 22px / 1.35 var(--titulos);
+  text-align: left;
+}
+
+.razon .personaje {
+  display: block;
+  margin: 0 auto 12px;
+}
+
+.razon__titulo {
+  margin: 0 0 10px;
+  color: var(--rosa);
+  font: 700 20px / 1.3 var(--titulos);
+}
+
+.razon__texto {
+  margin: 0;
+  color: var(--ciruela);
+  font: 500 16px / 1.6 var(--texto);
 }
 
 .razon small {
   display: block;
-  margin-top: 10px;
+  margin-top: 14px;
   color: var(--ciruela-suave);
-  font: 600 15px var(--texto);
+  font: 600 14px var(--texto);
+  text-align: right;
+}
+
+.razon__cierre {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 233, 239, 0.6);
+  border: 1px dashed var(--borde);
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.razon__cierre p {
+  margin: 0 0 8px;
+}
+
+.razon__cierre strong {
+  display: block;
+  color: var(--rosa);
 }
 
 .linea {

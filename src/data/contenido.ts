@@ -17,11 +17,46 @@ export const CARTA = {
   firma: 'Tu brocolito. ❤️🥦',
 }
 export const RAZONES = [
-  'Porque me haces reír hasta cuando estoy cansado.',
-  'Porque contigo todo es más lindo.',
-  'Porque cuidas de Lya con tanto cariño.',
-  'Porque eres mi persona favorita del mundo.',
-  'Porque contigo me siento en casa.',
+  {
+    titulo: 'Porque te ríes de mis tonteras.',
+    texto: 'Me encanta decir mis tonteras y que te rías de las cosas que digo, ksksks. Me hace feliz poder sacarte una sonrisa hasta cuando digo la estupidez más grande del mundo. Me gusta que podamos reírnos juntos por cualquier cosa y que esos momentos sean tan nuestros.',
+  },
+  {
+    titulo: 'Porque contigo me siento seguro.',
+    texto: 'Me gusta sentir que puedo ser yo mismo contigo, sin tener que fingir ser alguien diferente. Puedo mostrarte mi forma de ser, decir mis tonteras y estar tranquilo siendo tu brocolito. Es bonito tener a alguien con quien puedo sentirme así de cómodo.',
+  },
+  {
+    titulo: 'Porque eres comprensiva conmigo.',
+    texto: 'Valoro mucho que intentes entenderme y que seas comprensiva conmigo. Para mí significa mucho sentir que puedo expresarte lo que pienso y siento, incluso cuando no encuentro las palabras correctas. Es algo que aprecio mucho de ti, mi niña hermosa.',
+  },
+  {
+    titulo: 'Porque estoy enamorado de tus ojitos.',
+    texto: 'Ali, no sé qué tienen tus ojitos, pero me tienen demasiado enamorado. Me encanta verlos brillar y lo preciosa que te ves cuando te ríes. A veces me quedo pensando en lo lindos que son y en cómo algo tan pequeñito de ti puede gustarme tanto.',
+  },
+  {
+    titulo: 'Porque me encanta tu sonrisa.',
+    texto: 'Tu sonrisa es una de mis cosas favoritas de ti. Me encanta verte sonreír y saber que estás feliz. Y si encima consigo sacarte una sonrisa con alguna de mis tonteras, mucho mejor, ksksks. De verdad, espero poder seguir viendo esa sonrisa tan bonita por muchísimo tiempo.',
+  },
+  {
+    titulo: 'Porque me encanta dormir abrazado contigo.',
+    texto: 'No sé cómo explicarlo, pero me gusta muchísimo cuando estamos durmiendo abrazaditos. Poder tenerte cerquita, sentir tus abrazos y quedarme así contigo es de esos momentos en los que simplemente me siento feliz. No necesitamos hacer nada especial; me basta con tener a mi niñita hermosa entre mis brazos.',
+  },
+  {
+    titulo: 'Porque hasta cuando te preocupas por mí me das ternura.',
+    texto: 'Me da mucha ternura cuando me dices que me coma toda la comida, porque siento bonito saber que te preocupas por mí hasta en esas cositas. Y cuando me dices «mi guagua», no sé, me da una ternura enorme. Son esos pequeños detalles tuyos los que hacen que me encante tanto tenerte en mi vida.',
+  },
+  {
+    titulo: 'Porque admiro lo fuerte que eres.',
+    texto: 'Admiro que, a pesar de todas las cosas que has pasado, sigas adelante. Sé que no siempre todo es fácil, y por eso me parece muy bonito ver la fuerza que tienes. Quiero que sepas que admiro mucho esa parte de ti y que espero que nunca olvides lo valiosa que eres.',
+  },
+  {
+    titulo: 'Porque eres mi princesita bella.',
+    texto: 'Mi Ali, de verdad pienso que eres demasiado hermosa. A veces siento que hasta las estrellas del universo deben sentir envidia cuando sales, porque ninguna brilla como tú ante mis ojos. Y aunque me encanta tu belleza, también me gusta que seas esa personita tan especial con la que puedo compartir mis días y mis tonteras.',
+  },
+  {
+    titulo: 'Porque entre tantas personas, quiero seguir compartiendo mi vida contigo.',
+    texto: 'De todas las personas que existen en este mundo, qué bonito fue coincidir contigo. Me gusta lo que tenemos, los momentos que compartimos y pensar en todas las cosas que todavía nos quedan por vivir. Quiero seguir conociéndote, seguir creando recuerdos contigo y encontrar nuevas razones para enamorarme de ti.',
+  },
 ]
 export const FECHAS = [
   { fecha: '', titulo: 'Nos conocimos', texto: 'El día que cambió todo.' },
