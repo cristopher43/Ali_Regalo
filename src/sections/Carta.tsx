@@ -7,7 +7,7 @@ export default function Carta() {
       <article className="hoja">
         <h2>{CARTA.saludo}</h2>
         {CARTA.parrafos.map((p) => <p key={p}>{p}</p>)}
-        <p className="firma">Con todo mi amor,<br />{CARTA.firma} ♥</p>
+        <p className="firma">Con todo mi amor,<br /><strong>{CARTA.firma}</strong></p>
       </article>
       <img
         className="lya-recuerdo lya-recuerdo--carta"
