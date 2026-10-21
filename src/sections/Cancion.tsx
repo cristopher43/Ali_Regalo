@@ -27,25 +27,26 @@ export default function Cancion() {
   const [verLetra, setVerLetra] = useState(true)
 
   // Encontrar qué línea de la letra corresponde al segundo actual
-  const indiceActivo = LETRA_SINCRONIZADA.reduce((acc, linea, i) => {
-    return tiempoActual >= linea.tiempo ? i : acc
-  }, 0)
+  let indiceActivo = 0
+  for (let i = 0; i < LETRA_SINCRONIZADA.length; i++) {
+    if (tiempoActual >= LETRA_SINCRONIZADA[i].tiempo) {
+      indiceActivo = i
+    }
+  }
 
-  // Bucle de sincronización de alta precisión (60fps) usando requestAnimationFrame
+  // Timer activo que actualiza tiempoActual cada 100ms mientras suena
   useEffect(() => {
-    let animId: number
-    const actualizar = () => {
-      if (audio.current && !audio.current.paused) {
+    if (!suena) return
+    const interval = setInterval(() => {
+      if (audio.current) {
         const t = audio.current.currentTime
         const d = audio.current.duration || 1
         setTiempoActual(t)
         setAvance((t / d) * 100)
       }
-      animId = requestAnimationFrame(actualizar)
-    }
-    animId = requestAnimationFrame(actualizar)
-    return () => cancelAnimationFrame(animId)
-  }, [])
+    }, 100)
+    return () => clearInterval(interval)
+  }, [suena])
 
   // Auto-scroll suave para mantener la línea activa a la vista
   useEffect(() => {
