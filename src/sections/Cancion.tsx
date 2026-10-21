@@ -23,6 +23,7 @@ export default function Cancion() {
   const [tiempoActual, setTiempoActual] = useState(0)
   const [duracion, setDuracion] = useState(0)
   const [error, setError] = useState(false)
+  const [verLetra, setVerLetra] = useState(false)
 
   async function alternar() {
     const reproductor = audio.current
@@ -81,9 +82,56 @@ export default function Cancion() {
         <span>{mostrarTiempo(duracion)}</span>
       </div>
 
-      <button className="boton" type="button" onClick={alternar}>
-        {suena ? 'Pausar' : 'Reproducir'}
-      </button>
+      <div className="par">
+        <button className="boton" type="button" onClick={alternar}>
+          {suena ? '⏸ Pausar' : '▶ Reproducir'}
+        </button>
+        <button
+          className="boton claro"
+          type="button"
+          onClick={() => setVerLetra(!verLetra)}
+        >
+          {verLetra ? 'Ocultar letra' : '📜 Ver letra'}
+        </button>
+      </div>
+
+      {verLetra && (
+        <article className="cancion__letra" aria-label="Letra de Cómplice Eterno">
+          <h3>Cómplice Eterno — Glup!</h3>
+          <p>
+            Te propongo que hagamos un trato<br />
+            Un pacto que selle nuestro secreto<br />
+            Tú te callas y yo me callo también<br />
+            Y que nadie se entere que lo nuestro es un hecho.
+          </p>
+          <p>
+            Pero a obscuras solitos los dos<br />
+            Nos amemos una y otra vez<br />
+            Nos quedemos al amanecer…
+          </p>
+          <p>
+            Te propongo que lo hagamos así<br />
+            Para que no nos culpen de volvernos locos<br />
+            Porque nadie se atreve a entender<br />
+            Semejante cariño entre nosotros.
+          </p>
+          <p>
+            Y si supieran las cosas que tú<br />
+            Me regalas en tu florecer<br />
+            Ese aroma de hacerte mujer…
+          </p>
+          <p className="cancion__letra-destacado">
+            ❤️ <em>Y te propongo que lo pienses dos veces<br />
+            Que te tomes tu tiempo que lo hagamos lento<br />
+            Como Dios hizo al cielo para que sea perfecto…</em>
+          </p>
+          <p className="cancion__letra-destacado">
+            <em>Y si me pides que sea tu cómplice eterno<br />
+            Culpable de amarte, tu platónico amor…</em><br />
+            <strong>Tu cómplice eterno… ✨</strong>
+          </p>
+        </article>
+      )}
 
       {error && (
         <p className="aviso" role="alert">
