@@ -31,6 +31,22 @@ export default function Cancion() {
     return tiempoActual >= linea.tiempo ? i : acc
   }, 0)
 
+  // Bucle de sincronización de alta precisión (60fps) usando requestAnimationFrame
+  useEffect(() => {
+    let animId: number
+    const actualizar = () => {
+      if (audio.current && !audio.current.paused) {
+        const t = audio.current.currentTime
+        const d = audio.current.duration || 1
+        setTiempoActual(t)
+        setAvance((t / d) * 100)
+      }
+      animId = requestAnimationFrame(actualizar)
+    }
+    animId = requestAnimationFrame(actualizar)
+    return () => cancelAnimationFrame(animId)
+  }, [])
+
   // Auto-scroll suave para mantener la línea activa a la vista
   useEffect(() => {
     if (!verLetra || !contenedorLetraRef.current) return
