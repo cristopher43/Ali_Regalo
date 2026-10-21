@@ -16,14 +16,14 @@ const POSE: Record<Estado, Pose> = {
 const DICE: Record<Estado, string> = {
   feliz: 'Miau ♥',
   muyfeliz: '¡Miau! *ronronea feliz* Purr purr… ♥',
-  comiendo: 'Ñam ñam…',
+  comiendo: '¡Miu miu miu! *ñam ñam*… ♥',
   jugando: '¡Atrapé la pluma!',
   durmiendo: 'Zzz…',
   triste: 'Te extrañé…',
 }
 const ACCIONES: { texto: string; estado: Estado; icono: string; sonido: string }[] = [
   { texto: 'Acariciar', estado: 'muyfeliz', icono: '♡', sonido: '/sounds/purr.wav' },
-  { texto: 'Comida', estado: 'comiendo', icono: '♥', sonido: '/sounds/happy.wav' },
+  { texto: 'Comida', estado: 'comiendo', icono: '♥', sonido: '/sounds/eating_nom.wav' },
   { texto: 'Jugar', estado: 'jugando', icono: '✿', sonido: '/sounds/meow.wav' },
   { texto: 'Dormir', estado: 'durmiendo', icono: '☾', sonido: '/sounds/purr.wav' },
 ]
