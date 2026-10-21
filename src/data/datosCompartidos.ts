@@ -140,13 +140,35 @@ export async function eliminarFechaCompartida(id: Identificador) {
   if (error) throw error
 }
 
-export function escucharCambios(tabla: 'recuerdos' | 'fechas_importantes', alCambiar: () => void) {
+export function escucharCambios(tabla: 'recuerdos' | 'fechas_importantes' | 'cupones_canjeados', alCambiar: () => void) {
   const cliente = supabase
   if (!cliente) return () => {}
   const canal = cliente.channel(`cambios-${tabla}-${crypto.randomUUID()}`)
     .on('postgres_changes', { event: '*', schema: 'public', table: tabla }, alCambiar)
     .subscribe()
   return () => { void cliente.removeChannel(canal) }
+}
+
+export async function cargarCuponesCanjeados(): Promise<Record<number, string>> {
+  const { data, error } = await requerirSupabase().from('cupones_canjeados').select('cupon_id, canjeado_en')
+  if (error) throw error
+  const mapa: Record<number, string> = {}
+  for (const item of (data as { cupon_id: number; canjeado_en: string }[])) {
+    mapa[item.cupon_id] = item.canjeado_en
+  }
+  return mapa
+}
+
+export async function registrarCanjeCupon(cuponId: number): Promise<string> {
+  const cliente = requerirSupabase()
+  const fecha = new Date().toISOString()
+  const { data, error } = await cliente
+    .from('cupones_canjeados')
+    .upsert({ cupon_id: cuponId, canjeado_en: fecha }, { onConflict: 'cupon_id' })
+    .select('canjeado_en')
+    .single()
+  if (error) throw error
+  return data?.canjeado_en ?? fecha
 }
 
 export function recuerdosGuardadosEnEsteNavegador(): Recuerdo[] {

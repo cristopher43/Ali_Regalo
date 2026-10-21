@@ -9,5 +9,5 @@ export const SECCIONES: Seccion[] = [
   { ruta: 'cancion', titulo: 'Nuestra canción', detalle: 'Melodía de los dos', fase: 4, quien: 'pinguino', pose: 'caminando', icono: 'cancion' },
   { ruta: 'razones', titulo: 'Razones', detalle: 'Por qué te amo', fase: 4, quien: 'ranita', pose: 'mimos', icono: 'razones' },
   { ruta: 'fechas', titulo: 'Fechas especiales', detalle: 'Días inolvidables', fase: 4, quien: 'lya', pose: 'reposo', icono: 'fechas' },
-  { ruta: 'sorpresa', titulo: 'Sorpresa final', detalle: 'Solo para ti', fase: 4, quien: 'lya', pose: 'jugando', icono: 'sorpresa' },
+  { ruta: 'sorpresa', titulo: 'Una cajita de cupones', detalle: 'Para mi Ali 💌', fase: 4, quien: 'lya', pose: 'jugando', icono: 'sorpresa' },
 ]
