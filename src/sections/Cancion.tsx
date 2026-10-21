@@ -34,21 +34,17 @@ export default function Cancion() {
     }
   }
 
-  // Timer activo que actualiza tiempoActual cada 100ms mientras suena
-  useEffect(() => {
-    if (!suena) return
-    const interval = setInterval(() => {
-      if (audio.current) {
-        const t = audio.current.currentTime
-        const d = audio.current.duration || 1
-        setTiempoActual(t)
-        setAvance((t / d) * 100)
-      }
-    }, 100)
-    return () => clearInterval(interval)
-  }, [suena])
+  // Actualizador ligado directamente a los eventos nativos del audio
+  const sincronizarConAudio = () => {
+    if (audio.current) {
+      const t = audio.current.currentTime
+      const d = audio.current.duration || 1
+      setTiempoActual(t)
+      setAvance((t / d) * 100)
+    }
+  }
 
-  // Auto-scroll suave para mantener la línea activa a la vista
+  // Auto-scroll suave para mantener la línea activa en el centro
   useEffect(() => {
     if (!verLetra || !contenedorLetraRef.current) return
     const elActivo = contenedorLetraRef.current.querySelector('.letra-linea.activa')
@@ -63,14 +59,12 @@ export default function Cancion() {
 
     if (suena) {
       reproductor.pause()
-      setSuena(false)
       return
     }
 
     try {
       await reproductor.play()
       setError(false)
-      setSuena(true)
     } catch {
       setError(true)
       setSuena(false)
@@ -140,7 +134,7 @@ export default function Cancion() {
                   onClick={() => {
                     if (audio.current) {
                       audio.current.currentTime = linea.tiempo
-                      setTiempoActual(linea.tiempo)
+                      sincronizarConAudio()
                     }
                   }}
                   title="Toca para saltar a esta parte"
@@ -189,7 +183,9 @@ export default function Cancion() {
       <audio
         ref={audio}
         src="/musica/complice-eterno.mp3"
-        preload="metadata"
+        preload="auto"
+        onPlay={() => setSuena(true)}
+        onPause={() => setSuena(false)}
         onError={() => {
           setError(true)
           setSuena(false)
@@ -197,14 +193,13 @@ export default function Cancion() {
         onLoadedMetadata={(evento) => {
           setDuracion(evento.currentTarget.duration)
         }}
-        onTimeUpdate={(evento) => {
-          const reproductor = evento.currentTarget
-          const porcentaje =
-            (reproductor.currentTime / (reproductor.duration || 1)) * 100
-          setTiempoActual(reproductor.currentTime)
-          setAvance(porcentaje)
+        onTimeUpdate={sincronizarConAudio}
+        onSeeked={sincronizarConAudio}
+        onEnded={() => {
+          setSuena(false)
+          setAvance(0)
+          setTiempoActual(0)
         }}
-        onEnded={() => setSuena(false)}
       />
     </Pantalla>
   )
