@@ -1,0 +1,40 @@
+export type LineaLetra = {
+  tiempo: number // segundos de inicio
+  texto: string
+}
+
+export const LETRA_SINCRONIZADA: LineaLetra[] = [
+  { tiempo: 0, texto: '♪ (Introducción musical) ♪' },
+  { tiempo: 14.5, texto: 'Te propongo que hagamos un trato' },
+  { tiempo: 18.5, texto: 'Un pacto que selle nuestro secreto' },
+  { tiempo: 22.5, texto: 'Tú te callas y yo me callo también' },
+  { tiempo: 26.5, texto: 'Y que nadie se entere que lo nuestro es un hecho' },
+  { tiempo: 30.5, texto: 'Pero a oscuras solitos los dos' },
+  { tiempo: 34.5, texto: 'Nos amemos una y otra vez' },
+  { tiempo: 38.5, texto: 'Nos quedemos al amanecer…' },
+  { tiempo: 43.5, texto: 'Te propongo que lo hagamos así' },
+  { tiempo: 47.5, texto: 'Para que no nos culpen de volvernos locos' },
+  { tiempo: 51.5, texto: 'Porque nadie se atreve a entender' },
+  { tiempo: 55.5, texto: 'Semejante cariño entre nosotros' },
+  { tiempo: 59.5, texto: 'Y si supieran las cosas que tú' },
+  { tiempo: 63.5, texto: 'Me regalas en tu florecer' },
+  { tiempo: 67.5, texto: 'Ese aroma de hacerte mujer…' },
+  { tiempo: 72.5, texto: '❤️ Y te propongo que lo pienses dos veces' },
+  { tiempo: 76.5, texto: 'Que te tomes tu tiempo que lo hagamos lento' },
+  { tiempo: 80.5, texto: 'Como Dios hizo al cielo para que sea perfecto' },
+  { tiempo: 88.5, texto: 'Y si me pides que yo te haga mujer' },
+  { tiempo: 92.5, texto: 'Me pides que sea tu cómplice eterno' },
+  { tiempo: 96.5, texto: 'Tu verdugo de niña, tu platónico amor…' },
+  { tiempo: 104.5, texto: '🎸 (Solo de guitarra) ♪' },
+  { tiempo: 120.5, texto: '❤️ Y te propongo que lo pienses dos veces' },
+  { tiempo: 124.5, texto: 'Que te tomes tu tiempo que lo hagamos lento' },
+  { tiempo: 128.5, texto: 'Como Dios hizo al cielo para que sea perfecto' },
+  { tiempo: 136.5, texto: 'Y si me pides que yo te haga mujer' },
+  { tiempo: 140.5, texto: 'Me pides que sea tu cómplice eterno' },
+  { tiempo: 144.5, texto: 'Tu verdugo de niña, tu platónico amor…' },
+  { tiempo: 152.5, texto: 'Y si me pides que yo te haga mujer' },
+  { tiempo: 156.5, texto: 'Me pides que sea culpable de amarte' },
+  { tiempo: 160.5, texto: 'Tu verdugo de niña, tu platónico amor…' },
+  { tiempo: 168.5, texto: 'Tu cómplice eterno… ✨' },
+  { tiempo: 172.5, texto: 'Tu cómplice eterno… 💖' },
+]

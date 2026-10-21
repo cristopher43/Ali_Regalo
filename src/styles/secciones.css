@@ -2118,3 +2118,79 @@
   margin-top: 6px;
   font: 700 16px var(--titulos);
 }
+
+/* ========================================================
+   LETRA KARAOKE EN TIEMPO REAL ??
+   ======================================================== */
+
+.cancion__karaoke {
+  max-width: 480px;
+  width: 100%;
+  margin: 18px auto 24px;
+  padding: 16px 14px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--borde);
+  box-shadow: 0 10px 30px rgba(74, 43, 79, 0.1);
+  text-align: center;
+}
+
+.cancion__karaoke-cabecera {
+  margin-bottom: 10px;
+}
+
+.cancion__karaoke-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #ffe9f0;
+  color: var(--rosa);
+  font: 700 12px var(--texto);
+  letter-spacing: 0.04em;
+}
+
+.cancion__karaoke-lista {
+  max-height: 240px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.letra-linea {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font: 600 15px / 1.45 var(--texto);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.letra-linea.pasada {
+  color: #a49199;
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.letra-linea.futura {
+  color: var(--ciruela);
+  opacity: 0.7;
+}
+
+.letra-linea.activa {
+  color: #fff;
+  background: linear-gradient(135deg, #f05b91, #d94379);
+  font: 700 18px / 1.4 var(--titulos);
+  box-shadow: 0 6px 18px rgba(240, 91, 145, 0.35);
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.letra-linea:hover:not(.activa) {
+  background: #fff0f5;
+  opacity: 1;
+}

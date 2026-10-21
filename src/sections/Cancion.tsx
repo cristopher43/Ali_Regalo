@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Pantalla from '../components/Pantalla'
+import { LETRA_SINCRONIZADA } from '../data/letraCancion'
 
 const POSES_LYA = [
   '/lya-recuerdos/lya-baile.png',
@@ -12,22 +13,35 @@ function mostrarTiempo(segundos: number) {
   const tiempo = Number.isFinite(segundos) ? Math.floor(segundos) : 0
   const minutos = Math.floor(tiempo / 60)
   const segundosRestantes = String(tiempo % 60).padStart(2, '0')
-
   return `${minutos}:${segundosRestantes}`
 }
 
 export default function Cancion() {
   const audio = useRef<HTMLAudioElement>(null)
+  const contenedorLetraRef = useRef<HTMLDivElement>(null)
   const [suena, setSuena] = useState(false)
   const [avance, setAvance] = useState(0)
   const [tiempoActual, setTiempoActual] = useState(0)
   const [duracion, setDuracion] = useState(0)
   const [error, setError] = useState(false)
-  const [verLetra, setVerLetra] = useState(false)
+  const [verLetra, setVerLetra] = useState(true)
+
+  // Encontrar qué línea de la letra corresponde al segundo actual
+  const indiceActivo = LETRA_SINCRONIZADA.reduce((acc, linea, i) => {
+    return tiempoActual >= linea.tiempo ? i : acc
+  }, 0)
+
+  // Auto-scroll suave para mantener la línea activa a la vista
+  useEffect(() => {
+    if (!verLetra || !contenedorLetraRef.current) return
+    const elActivo = contenedorLetraRef.current.querySelector('.letra-linea.activa')
+    if (elActivo) {
+      elActivo.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [indiceActivo, verLetra])
 
   async function alternar() {
     const reproductor = audio.current
-
     if (!reproductor) return
 
     if (suena) {
@@ -57,7 +71,6 @@ export default function Cancion() {
 
       <div className="cancion__control">
         <span>{mostrarTiempo(tiempoActual)}</span>
-
         <input
           className="barra"
           type="range"
@@ -70,7 +83,6 @@ export default function Cancion() {
           onChange={(evento) => {
             const nuevoAvance = Number(evento.target.value)
             setAvance(nuevoAvance)
-
             if (audio.current && duracion > 0) {
               const nuevoTiempo = (nuevoAvance / 100) * duracion
               audio.current.currentTime = nuevoTiempo
@@ -78,7 +90,6 @@ export default function Cancion() {
             }
           }}
         />
-
         <span>{mostrarTiempo(duracion)}</span>
       </div>
 
@@ -91,45 +102,37 @@ export default function Cancion() {
           type="button"
           onClick={() => setVerLetra(!verLetra)}
         >
-          {verLetra ? 'Ocultar letra' : '📜 Ver letra'}
+          {verLetra ? 'Ocultar letra' : '🎤 Letra karaoke'}
         </button>
       </div>
 
       {verLetra && (
-        <article className="cancion__letra" aria-label="Letra de Cómplice Eterno">
-          <h3>Cómplice Eterno — Glup!</h3>
-          <p>
-            Te propongo que hagamos un trato<br />
-            Un pacto que selle nuestro secreto<br />
-            Tú te callas y yo me callo también<br />
-            Y que nadie se entere que lo nuestro es un hecho.
-          </p>
-          <p>
-            Pero a obscuras solitos los dos<br />
-            Nos amemos una y otra vez<br />
-            Nos quedemos al amanecer…
-          </p>
-          <p>
-            Te propongo que lo hagamos así<br />
-            Para que no nos culpen de volvernos locos<br />
-            Porque nadie se atreve a entender<br />
-            Semejante cariño entre nosotros.
-          </p>
-          <p>
-            Y si supieran las cosas que tú<br />
-            Me regalas en tu florecer<br />
-            Ese aroma de hacerte mujer…
-          </p>
-          <p className="cancion__letra-destacado">
-            ❤️ <em>Y te propongo que lo pienses dos veces<br />
-            Que te tomes tu tiempo que lo hagamos lento<br />
-            Como Dios hizo al cielo para que sea perfecto…</em>
-          </p>
-          <p className="cancion__letra-destacado">
-            <em>Y si me pides que sea tu cómplice eterno<br />
-            Culpable de amarte, tu platónico amor…</em><br />
-            <strong>Tu cómplice eterno… ✨</strong>
-          </p>
+        <article className="cancion__karaoke" aria-label="Letra karaoke sincronizada">
+          <header className="cancion__karaoke-cabecera">
+            <span className="cancion__karaoke-tag">🎤 Letra en tiempo real</span>
+          </header>
+          <div className="cancion__karaoke-lista" ref={contenedorLetraRef}>
+            {LETRA_SINCRONIZADA.map((linea, index) => {
+              const esActiva = index === indiceActivo
+              const yaPaso = index < indiceActivo
+
+              return (
+                <p
+                  key={index}
+                  className={`letra-linea ${esActiva ? 'activa' : yaPaso ? 'pasada' : 'futura'}`}
+                  onClick={() => {
+                    if (audio.current) {
+                      audio.current.currentTime = linea.tiempo
+                      setTiempoActual(linea.tiempo)
+                    }
+                  }}
+                  title="Toca para saltar a esta parte"
+                >
+                  {linea.texto}
+                </p>
+              )
+            })}
+          </div>
         </article>
       )}
 
@@ -159,6 +162,7 @@ export default function Cancion() {
           </>
         )}
       </div>
+
       <p className="lya-mensaje" aria-live="polite">
         {suena
           ? '¡Lya está bailando contigo en todas sus poses! ♥'
@@ -180,7 +184,6 @@ export default function Cancion() {
           const reproductor = evento.currentTarget
           const porcentaje =
             (reproductor.currentTime / (reproductor.duration || 1)) * 100
-
           setTiempoActual(reproductor.currentTime)
           setAvance(porcentaje)
         }}
