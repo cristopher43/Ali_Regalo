@@ -1989,3 +1989,23 @@
     min-height: 38px;
   }
 }
+
+/* Vista Libro Integrada (como el mapa) */
+.album__vista-libro {
+  margin: 16px 0 24px;
+}
+
+.libro-contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #382830, #241920);
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(45, 25, 35, 0.35);
+  border: 3px solid #5a4049;
+}
+
+.libro-contenedor .libro-barra-superior {
+  background: rgba(255, 255, 255, 0.08);
+}

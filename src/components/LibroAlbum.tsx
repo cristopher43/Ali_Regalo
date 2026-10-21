@@ -65,7 +65,7 @@ export default function LibroAlbum({ recuerdos, alCerrar }: Props) {
   const fotosEnPliego = recuerdos.slice(indiceInicial, indiceInicial + fotosPorHoja)
 
   return (
-    <div className="libro-overlay" role="dialog" aria-modal="true" aria-label="Álbum de recuerdos físico">
+    <div className="libro-contenedor" aria-label="Álbum de recuerdos físico">
       <div className="libro-barra-superior">
         <div className="libro-barra-titulo">
           <span className="libro-icono">📖</span>
@@ -78,9 +78,9 @@ export default function LibroAlbum({ recuerdos, alCerrar }: Props) {
           className="boton chico claro libro-btn-cerrar"
           type="button"
           onClick={alCerrar}
-          aria-label="Cerrar vista de álbum"
+          aria-label="Volver a la vista normal"
         >
-          ✕ Cerrar
+          ← Volver a Polaroids
         </button>
       </div>
 

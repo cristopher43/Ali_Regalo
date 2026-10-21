@@ -65,8 +65,7 @@ export default function Album() {
   const [estadoBusquedaLugar, setEstadoBusquedaLugar] = useState('')
   const [errorGuardado, setErrorGuardado] = useState('')
   const [coordenadas, setCoordenadas] = useState<Coordenadas | null>(null)
-  const [vista, setVista] = useState<'paginas' | 'mapa'>('paginas')
-  const [mostrarLibro, setMostrarLibro] = useState(false)
+  const [vista, setVista] = useState<'paginas' | 'mapa' | 'libro'>('paginas')
   const [recuerdoElegido, setRecuerdoElegido] = useState<Identificador | null>(null)
   const [recuerdoPorUbicar, setRecuerdoPorUbicar] = useState<Identificador | null>(null)
   const [opcionesAbiertasId, setOpcionesAbiertasId] = useState<Identificador | null>(null)
@@ -288,7 +287,7 @@ export default function Album() {
         <button className={vista === 'mapa' ? 'activa' : ''} onClick={() => setVista('mapa')} type="button">
           📍 Mapa
         </button>
-        <button className="album__btn-libro" onClick={() => setMostrarLibro(true)} type="button">
+        <button className={vista === 'libro' ? 'activa' : ''} onClick={() => setVista('libro')} type="button">
           📖 Ver como álbum
         </button>
       </div>
@@ -337,7 +336,7 @@ export default function Album() {
             </figure>
           ))}
         </div>
-      ) : (
+      ) : vista === 'mapa' ? (
         <section className="album__mapa" aria-label="Mapa interactivo de nuestros recuerdos">
           <MapaRecuerdos recuerdos={lista} elegidoId={recuerdoElegido} alElegir={setRecuerdoElegido} />
           {recuerdoActivo && (
@@ -368,6 +367,10 @@ export default function Album() {
               ))}
             </div>
           )}
+        </section>
+      ) : (
+        <section className="album__vista-libro" aria-label="Álbum de recuerdos físico">
+          <LibroAlbum recuerdos={lista} alCerrar={() => setVista('paginas')} />
         </section>
       )}
       {abierto ? (
@@ -417,10 +420,6 @@ export default function Album() {
           {abierto ? '↓ Ir al formulario' : '+ Agregar recuerdo'}
         </button>
       </div>
-
-      {mostrarLibro && (
-        <LibroAlbum recuerdos={lista} alCerrar={() => setMostrarLibro(false)} />
-      )}
     </Pantalla>
   )
 }
