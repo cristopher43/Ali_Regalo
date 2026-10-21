@@ -15,7 +15,7 @@ const POSE: Record<Estado, Pose> = {
 }
 const DICE: Record<Estado, string> = {
   feliz: 'Miau ♥',
-  muyfeliz: 'Purr purr ♥',
+  muyfeliz: '¡Miau! *ronronea feliz* Purr purr… ♥',
   comiendo: 'Ñam ñam…',
   jugando: '¡Atrapé la pluma!',
   durmiendo: 'Zzz…',
@@ -117,7 +117,13 @@ export default function Lya() {
     }
 
     // Efecto de sonido según la acción
-    if (nuevoAnimo === 5 && animoAnterior < 5) {
+    if (accion.estado === 'muyfeliz') {
+      // Al acariciarla: primero maúlla y enseguida ronronea
+      reproducirSonido('/sounds/baby_meow.wav', 0.45)
+      setTimeout(() => {
+        reproducirSonido('/sounds/purr.wav', 0.45)
+      }, 350)
+    } else if (nuevoAnimo === 5 && animoAnterior < 5) {
       // Celebración si alcanza el máximo de felicidad
       reproducirSonido('/sounds/celebration.wav', 0.45)
     } else {
